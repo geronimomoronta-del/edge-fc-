@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       live: Boolean(key),
-      version: "0.5.0"
+      version: "0.6.0"
     });
   }
 
@@ -19,6 +19,7 @@ export default async function handler(req, res) {
 
   const action = req.query.action || "today";
   const fixture = req.query.fixture;
+  const team = req.query.team;
 
   let url = "";
 
@@ -41,7 +42,7 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
-  // ESTADÍSTICAS DEL PARTIDO
+  // ESTADÍSTICAS DE UN PARTIDO
   else if (action === "stats") {
     if (!fixture) {
       return res.status(400).json({
@@ -67,6 +68,29 @@ export default async function handler(req, res) {
     url =
       "https://v3.football.api-sports.io/fixtures?id=" +
       encodeURIComponent(fixture);
+  }
+
+  // ÚLTIMOS PARTIDOS DE UN EQUIPO
+  else if (action === "teamform") {
+    if (!team) {
+      return res.status(400).json({
+        ok: false,
+        error: "Falta team ID"
+      });
+    }
+
+    let last = Number(req.query.last || 10);
+
+    if (!Number.isFinite(last)) last = 10;
+
+    last = Math.max(1, Math.min(last, 20));
+
+    url =
+      "https://v3.football.api-sports.io/fixtures?team=" +
+      encodeURIComponent(team) +
+      "&last=" +
+      last +
+      "&status=FT";
   }
 
   // PARTIDOS DEL DÍA
@@ -98,6 +122,7 @@ export default async function handler(req, res) {
       source: "api-football",
       action,
       fixture: fixture || null,
+      team: team || null,
       data: json.response || [],
       errors: json.errors || []
     });

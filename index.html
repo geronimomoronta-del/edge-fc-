@@ -1,3 +1,284 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EDGE FC</title><style>
-*{box-sizing:border-box}body{margin:0;background:#080b10;color:#eef2f5;font-family:-apple-system,BlinkMacSystemFont,Arial}.top{padding:20px;display:flex;justify-content:space-between;border-bottom:1px solid #202832}.brand{font-weight:900;font-size:20px}.brand b{background:#b7ff3c;color:#081008;padding:7px 11px;border-radius:9px;margin-right:8px}.live,.green{color:#b7ff3c}.wrap{max-width:1050px;margin:auto;padding:22px}h1{font-size:28px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card,.hero,.table,.panel{background:#0e141c;border:1px solid #1d2732;border-radius:12px}.card{padding:15px}.card small{display:block;color:#73808e;font-size:9px}.card strong{font-size:23px}.hero{margin:15px 0;padding:22px;background:linear-gradient(120deg,#142113,#0d1515)}.hero small{color:#aaff43}.hero h2{margin:8px 0}.metrics{display:flex;gap:20px;font-size:11px}.edge{font-size:20px;color:#b7ff3c;font-weight:900}.table{overflow:hidden}.row{display:grid;grid-template-columns:2fr 1.4fr .7fr .7fr;gap:10px;padding:14px;border-top:1px solid #1d2732;font-size:11px}.head{border:0;color:#718090;font-size:9px}.two{display:grid;grid-template-columns:1.5fr 1fr;gap:12px;margin-top:14px}.panel{padding:16px}.muted{color:#718090;font-size:10px}@media(max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1.6fr 1.2fr .6fr .7fr}.two{grid-template-columns:1fr}.wrap{padding:16px}}
-</style></head><body><div class="top"><div class="brand"><b>E</b>EDGE FC</div><span class="live">● LIVE DATA</span></div><main class="wrap"><div class="muted">DASHBOARD / HOY</div><h1>Oportunidades de valor</h1><section class="cards"><div class="card"><small>PARTIDOS HOY</small><strong>48</strong></div><div class="card"><small>OPORTUNIDADES</small><strong>17</strong></div><div class="card"><small>EDGE PROMEDIO</small><strong>8.7%</strong></div><div class="card"><small>CALIBRACIÓN</small><strong>72.4%</strong></div></section><section class="hero"><small>🔥 TOP VALUE AHORA</small><h2>Belgrano vs Huracán</h2><p class="muted">Argentina · Liga Profesional</p><p><b>DNB — Belgrano</b> &nbsp; <span class="edge">+12.4% EDGE</span></p><div class="metrics"><span>Cuota <b>1.72</b></span><span>Modelo <b>64%</b></span><span>Fair <b>1.56</b></span><span>EV <b>+10.1%</b></span></div></section><h3>🔥 Value Finder</h3><section class="table"><div class="row head"><span>PARTIDO</span><span>MERCADO</span><span>CUOTA</span><span>EDGE</span></div><div class="row"><b>Platense vs Riestra</b><span>Under 2.5</span><b>1.78</b><b class="green">+7.0%</b></div><div class="row"><b>Pachuca vs Juárez</b><span>DNB Pachuca</span><b>1.65</b><b class="green">+7.4%</b></div><div class="row"><b>NYCFC vs Nashville</b><span>O8.5 corners</span><b>1.91</b><b class="green">+6.3%</b></div></section><div class="two"><section class="panel"><b>⚡ Live Monitor</b><p>Belgrano <b>1 — 0</b> Huracán</p><span class="muted">Tiros 6–3 · Corners 3–2 · Tiros al arco 3–1</span></section><section class="panel"><b>Modelos</b><p class="muted">Resultado <span class="green">71.8%</span></p><p class="muted">Goles <span class="green">74.2%</span></p><p class="muted">Corners <span class="green">68.9%</span></p></section></div><p class="muted" style="text-align:center;margin-top:25px">PREVIEW — datos demostrativos.</p></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDGE FC</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#070b10;
+  color:#f4f7fa;
+  font-family:Arial,sans-serif
+}
+header{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  border-bottom:1px solid #1b2530;
+  background:#090e14
+}
+.logo{
+  font-weight:800;
+  font-size:20px
+}
+.live{
+  color:#9cff3b;
+  font-size:12px;
+  font-weight:700
+}
+main{
+  max-width:1000px;
+  margin:auto;
+  padding:22px 16px
+}
+h1{
+  font-size:26px;
+  margin:4px 0 6px
+}
+.sub{
+  color:#8593a3;
+  margin-bottom:22px
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:20px
+}
+.stat{
+  background:#0d151d;
+  border:1px solid #1b2833;
+  border-radius:10px;
+  padding:15px
+}
+.stat small{
+  color:#748392;
+  display:block;
+  font-size:10px;
+  margin-bottom:8px
+}
+.stat b{
+  font-size:20px
+}
+.panel{
+  background:#0c131a;
+  border:1px solid #1b2833;
+  border-radius:12px;
+  overflow:hidden
+}
+.panel-title{
+  padding:16px;
+  font-weight:700;
+  border-bottom:1px solid #1b2833
+}
+.match{
+  padding:15px 16px;
+  border-bottom:1px solid #17212a
+}
+.match:last-child{
+  border-bottom:0
+}
+.league{
+  color:#718090;
+  font-size:11px;
+  margin-bottom:7px
+}
+.teams{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+.names{
+  font-weight:700;
+  line-height:1.55
+}
+.score{
+  font-size:20px;
+  font-weight:800;
+  white-space:nowrap
+}
+.status{
+  margin-top:7px;
+  font-size:11px;
+  color:#9cff3b
+}
+.loading,.error{
+  padding:30px;
+  text-align:center;
+  color:#8795a4
+}
+.error{color:#ff7474}
+.refresh{
+  background:#9cff3b;
+  border:0;
+  color:#091006;
+  font-weight:800;
+  border-radius:8px;
+  padding:10px 14px
+}
+@media(max-width:650px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:22px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🟩 EDGE FC</div>
+  <div class="live">● REAL DATA</div>
+</header>
+
+<main>
+
+<h1>Football Betting Terminal</h1>
+<div class="sub">Datos reales obtenidos desde API-Football</div>
+
+<div class="stats">
+  <div class="stat">
+    <small>PARTIDOS</small>
+    <b id="total">—</b>
+  </div>
+
+  <div class="stat">
+    <small>EN VIVO</small>
+    <b id="live">—</b>
+  </div>
+
+  <div class="stat">
+    <small>FINALIZADOS</small>
+    <b id="finished">—</b>
+  </div>
+
+  <div class="stat">
+    <small>LIGAS</small>
+    <b id="leagues">—</b>
+  </div>
+</div>
+
+<div class="panel">
+
+  <div class="panel-title">
+    Partidos
+    <button class="refresh" onclick="loadMatches()" style="float:right">
+      Actualizar
+    </button>
+  </div>
+
+  <div id="matches" class="loading">
+    Cargando datos reales...
+  </div>
+
+</div>
+
+</main>
+
+<script>
+async function loadMatches(){
+
+  const box=document.getElementById("matches");
+
+  box.className="loading";
+  box.innerHTML="Cargando datos reales...";
+
+  try{
+
+    const response=await fetch("/api/data?ts="+Date.now());
+    const json=await response.json();
+
+    const matches=
+      json.matches ||
+      json.data ||
+      json.response ||
+      [];
+
+    document.getElementById("total").textContent=matches.length;
+
+    const liveMatches=matches.filter(m=>{
+      const s=m.fixture?.status?.short;
+      return ["1H","HT","2H","ET","BT","P","LIVE"].includes(s);
+    });
+
+    const finished=matches.filter(m=>{
+      return m.fixture?.status?.short==="FT";
+    });
+
+    const leagues=new Set(
+      matches.map(m=>m.league?.id).filter(Boolean)
+    );
+
+    document.getElementById("live").textContent=liveMatches.length;
+    document.getElementById("finished").textContent=finished.length;
+    document.getElementById("leagues").textContent=leagues.size;
+
+    if(!matches.length){
+      box.className="loading";
+      box.innerHTML="No hay partidos disponibles en este momento.";
+      return;
+    }
+
+    box.className="";
+
+    box.innerHTML=matches.map(m=>{
+
+      const home=m.teams?.home?.name || "Local";
+      const away=m.teams?.away?.name || "Visitante";
+
+      const hg=m.goals?.home;
+      const ag=m.goals?.away;
+
+      const score=
+        hg!==null && hg!==undefined
+        ? `${hg} - ${ag}`
+        : "vs";
+
+      const league=m.league?.name || "Competición";
+      const country=m.league?.country || "";
+      const status=m.fixture?.status?.long || "";
+
+      return `
+        <div class="match">
+          <div class="league">${country} · ${league}</div>
+
+          <div class="teams">
+            <div class="names">
+              ${home}<br>
+              ${away}
+            </div>
+
+            <div class="score">
+              ${score}
+            </div>
+          </div>
+
+          <div class="status">
+            ${status}
+          </div>
+        </div>
+      `;
+
+    }).join("");
+
+  }catch(error){
+
+    box.className="error";
+    box.innerHTML="Error cargando los datos de API-Football.";
+
+    console.error(error);
+  }
+}
+
+loadMatches();
+
+setInterval(loadMatches,60000);
+</script>
+
+</body>
+</html>

@@ -8,123 +8,87 @@
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:#070b10;
-  color:#f4f7fa;
+  margin:0;background:#070b10;color:#f4f7fa;
   font-family:Arial,sans-serif
 }
 header{
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  border-bottom:1px solid #1b2530;
-  background:#090e14
+  height:64px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 18px;
+  border-bottom:1px solid #1b2530;background:#090e14
 }
-.logo{
-  font-weight:800;
-  font-size:20px
-}
-.live{
-  color:#9cff3b;
-  font-size:12px;
-  font-weight:700
-}
-main{
-  max-width:1000px;
-  margin:auto;
-  padding:22px 16px
-}
-h1{
-  font-size:26px;
-  margin:4px 0 6px
-}
-.sub{
-  color:#8593a3;
-  margin-bottom:22px
-}
+.logo{font-weight:800;font-size:20px}
+.real{color:#91ff32;font-size:12px;font-weight:800}
+main{max-width:1000px;margin:auto;padding:22px 16px}
+h1{font-size:26px;margin:4px 0 6px}
+.sub{color:#8593a3;margin-bottom:20px}
+
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:20px
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:10px;margin-bottom:18px
 }
 .stat{
-  background:#0d151d;
-  border:1px solid #1b2833;
-  border-radius:10px;
-  padding:15px
+  background:#0d151d;border:1px solid #1b2833;
+  border-radius:10px;padding:15px
 }
 .stat small{
-  color:#748392;
-  display:block;
-  font-size:10px;
-  margin-bottom:8px
+  color:#748392;display:block;font-size:10px;margin-bottom:8px
 }
-.stat b{
-  font-size:20px
+.stat b{font-size:20px}
+
+.tabs{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin-bottom:14px
 }
+.tab{
+  border:1px solid #26333e;background:#0d151d;
+  color:#9aa7b4;padding:12px 5px;border-radius:9px;
+  font-weight:800
+}
+.tab.active{
+  background:#91ff32;color:#071006;border-color:#91ff32
+}
+
+.toolbar{
+  display:flex;justify-content:space-between;
+  align-items:center;margin:15px 0;gap:10px
+}
+.priority{
+  font-size:12px;color:#93a0ad
+}
+.refresh{
+  border:0;background:#91ff32;color:#071006;
+  padding:10px 13px;border-radius:8px;font-weight:800
+}
+
 .panel{
-  background:#0c131a;
-  border:1px solid #1b2833;
-  border-radius:12px;
-  overflow:hidden
-}
-.panel-title{
-  padding:16px;
-  font-weight:700;
-  border-bottom:1px solid #1b2833
+  background:#0c131a;border:1px solid #1b2833;
+  border-radius:12px;overflow:hidden
 }
 .match{
-  padding:15px 16px;
-  border-bottom:1px solid #17212a
+  padding:15px 16px;border-bottom:1px solid #17212a
 }
-.match:last-child{
-  border-bottom:0
-}
+.match:last-child{border-bottom:0}
+.match.latam{border-left:3px solid #91ff32}
 .league{
-  color:#718090;
-  font-size:11px;
-  margin-bottom:7px
+  color:#718090;font-size:11px;margin-bottom:8px
 }
 .teams{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px
 }
-.names{
-  font-weight:700;
-  line-height:1.55
+.names{font-weight:700;line-height:1.55}
+.score{font-size:20px;font-weight:800;white-space:nowrap}
+.status{margin-top:7px;font-size:11px;color:#91ff32}
+.date{margin-top:7px;font-size:11px;color:#8492a0}
+.empty,.error{
+  padding:35px;text-align:center;color:#8492a0
 }
-.score{
-  font-size:20px;
-  font-weight:800;
-  white-space:nowrap
-}
-.status{
-  margin-top:7px;
-  font-size:11px;
-  color:#9cff3b
-}
-.loading,.error{
-  padding:30px;
-  text-align:center;
-  color:#8795a4
-}
-.error{color:#ff7474}
-.refresh{
-  background:#9cff3b;
-  border:0;
-  color:#091006;
-  font-weight:800;
-  border-radius:8px;
-  padding:10px 14px
-}
+.error{color:#ff7272}
+
 @media(max-width:650px){
   .stats{grid-template-columns:repeat(2,1fr)}
   h1{font-size:22px}
+  .tab{font-size:11px}
 }
 </style>
 </head>
@@ -133,143 +97,247 @@ h1{
 
 <header>
   <div class="logo">🟩 EDGE FC</div>
-  <div class="live">● REAL DATA</div>
+  <div class="real">● REAL DATA</div>
 </header>
 
 <main>
 
 <h1>Football Betting Terminal</h1>
-<div class="sub">Datos reales obtenidos desde API-Football</div>
+<div class="sub">Partidos reales · Argentina y Latinoamérica priorizados</div>
 
 <div class="stats">
   <div class="stat">
-    <small>PARTIDOS</small>
+    <small>TOTAL</small>
     <b id="total">—</b>
   </div>
-
   <div class="stat">
     <small>EN VIVO</small>
-    <b id="live">—</b>
+    <b id="liveCount">—</b>
   </div>
-
+  <div class="stat">
+    <small>PRÓXIMOS</small>
+    <b id="nextCount">—</b>
+  </div>
   <div class="stat">
     <small>FINALIZADOS</small>
-    <b id="finished">—</b>
-  </div>
-
-  <div class="stat">
-    <small>LIGAS</small>
-    <b id="leagues">—</b>
+    <b id="finishedCount">—</b>
   </div>
 </div>
 
-<div class="panel">
+<div class="tabs">
+  <button class="tab active" onclick="changeTab('live',this)">
+    🔴 EN VIVO
+  </button>
+  <button class="tab" onclick="changeTab('next',this)">
+    🕒 PRÓXIMOS
+  </button>
+  <button class="tab" onclick="changeTab('finished',this)">
+    ✅ FINALIZADOS
+  </button>
+</div>
 
-  <div class="panel-title">
-    Partidos
-    <button class="refresh" onclick="loadMatches()" style="float:right">
-      Actualizar
-    </button>
-  </div>
+<div class="toolbar">
+  <div class="priority">🇦🇷 LATAM tiene prioridad</div>
+  <button class="refresh" onclick="loadMatches()">Actualizar</button>
+</div>
 
-  <div id="matches" class="loading">
-    Cargando datos reales...
-  </div>
-
+<div class="panel" id="matches">
+  <div class="empty">Cargando partidos...</div>
 </div>
 
 </main>
 
 <script>
+let allMatches=[];
+let currentTab="live";
+
+const liveStatuses=[
+  "1H","HT","2H","ET","BT","P","INT","LIVE"
+];
+
+const latamCountries=[
+  "Argentina","Brazil","Brasil","Uruguay","Chile",
+  "Paraguay","Bolivia","Peru","Ecuador","Colombia",
+  "Venezuela","Mexico","Costa Rica","Panama",
+  "Honduras","Guatemala","El Salvador",
+  "Nicaragua","Dominican Republic"
+];
+
+function isLive(m){
+  return liveStatuses.includes(m.fixture?.status?.short);
+}
+
+function isFinished(m){
+  return ["FT","AET","PEN"].includes(m.fixture?.status?.short);
+}
+
+function isNext(m){
+  return ["NS","TBD"].includes(m.fixture?.status?.short);
+}
+
+function isLatam(m){
+  return latamCountries.includes(m.league?.country);
+}
+
+function prioritySort(a,b){
+  const aLatam=isLatam(a)?1:0;
+  const bLatam=isLatam(b)?1:0;
+
+  if(aLatam!==bLatam){
+    return bLatam-aLatam;
+  }
+
+  return new Date(a.fixture?.date)-new Date(b.fixture?.date);
+}
+
+function formatDate(date){
+  if(!date)return "";
+
+  try{
+    return new Intl.DateTimeFormat("es-AR",{
+      day:"2-digit",
+      month:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
+    }).format(new Date(date));
+  }catch{
+    return "";
+  }
+}
+
+function render(){
+
+  let list=[];
+
+  if(currentTab==="live"){
+    list=allMatches.filter(isLive);
+  }
+
+  if(currentTab==="next"){
+    list=allMatches.filter(isNext);
+  }
+
+  if(currentTab==="finished"){
+    list=allMatches.filter(isFinished);
+  }
+
+  list.sort(prioritySort);
+
+  const box=document.getElementById("matches");
+
+  if(!list.length){
+    box.innerHTML=
+      '<div class="empty">No hay partidos en esta categoría.</div>';
+    return;
+  }
+
+  box.innerHTML=list.map(m=>{
+
+    const home=m.teams?.home?.name || "Local";
+    const away=m.teams?.away?.name || "Visitante";
+
+    const hg=m.goals?.home;
+    const ag=m.goals?.away;
+
+    const score=
+      hg!==null && hg!==undefined &&
+      ag!==null && ag!==undefined
+      ? `${hg} - ${ag}`
+      : "vs";
+
+    const country=m.league?.country || "";
+    const league=m.league?.name || "Competición";
+
+    const status=
+      m.fixture?.status?.long ||
+      m.fixture?.status?.short ||
+      "";
+
+    const elapsed=m.fixture?.status?.elapsed;
+
+    let statusText=status;
+
+    if(isLive(m) && elapsed){
+      statusText=`🔴 ${elapsed}' · ${status}`;
+    }
+
+    return `
+      <div class="match ${isLatam(m)?"latam":""}">
+        <div class="league">
+          ${isLatam(m)?"★ ":""}${country} · ${league}
+        </div>
+
+        <div class="teams">
+          <div class="names">
+            ${home}<br>
+            ${away}
+          </div>
+
+          <div class="score">${score}</div>
+        </div>
+
+        <div class="status">${statusText}</div>
+        <div class="date">${formatDate(m.fixture?.date)}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function changeTab(tab,button){
+
+  currentTab=tab;
+
+  document.querySelectorAll(".tab").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  render();
+}
+
 async function loadMatches(){
 
   const box=document.getElementById("matches");
 
-  box.className="loading";
-  box.innerHTML="Cargando datos reales...";
+  box.innerHTML=
+    '<div class="empty">Actualizando datos reales...</div>';
 
   try{
 
-    const response=await fetch("/api/data?ts="+Date.now());
+    const response=
+      await fetch("/api/data?ts="+Date.now());
+
     const json=await response.json();
 
-    const matches=
+    allMatches=
       json.matches ||
       json.data ||
       json.response ||
       [];
 
-    document.getElementById("total").textContent=matches.length;
+    const live=allMatches.filter(isLive);
+    const next=allMatches.filter(isNext);
+    const finished=allMatches.filter(isFinished);
 
-    const liveMatches=matches.filter(m=>{
-      const s=m.fixture?.status?.short;
-      return ["1H","HT","2H","ET","BT","P","LIVE"].includes(s);
-    });
+    document.getElementById("total").textContent=
+      allMatches.length;
 
-    const finished=matches.filter(m=>{
-      return m.fixture?.status?.short==="FT";
-    });
+    document.getElementById("liveCount").textContent=
+      live.length;
 
-    const leagues=new Set(
-      matches.map(m=>m.league?.id).filter(Boolean)
-    );
+    document.getElementById("nextCount").textContent=
+      next.length;
 
-    document.getElementById("live").textContent=liveMatches.length;
-    document.getElementById("finished").textContent=finished.length;
-    document.getElementById("leagues").textContent=leagues.size;
+    document.getElementById("finishedCount").textContent=
+      finished.length;
 
-    if(!matches.length){
-      box.className="loading";
-      box.innerHTML="No hay partidos disponibles en este momento.";
-      return;
-    }
-
-    box.className="";
-
-    box.innerHTML=matches.map(m=>{
-
-      const home=m.teams?.home?.name || "Local";
-      const away=m.teams?.away?.name || "Visitante";
-
-      const hg=m.goals?.home;
-      const ag=m.goals?.away;
-
-      const score=
-        hg!==null && hg!==undefined
-        ? `${hg} - ${ag}`
-        : "vs";
-
-      const league=m.league?.name || "Competición";
-      const country=m.league?.country || "";
-      const status=m.fixture?.status?.long || "";
-
-      return `
-        <div class="match">
-          <div class="league">${country} · ${league}</div>
-
-          <div class="teams">
-            <div class="names">
-              ${home}<br>
-              ${away}
-            </div>
-
-            <div class="score">
-              ${score}
-            </div>
-          </div>
-
-          <div class="status">
-            ${status}
-          </div>
-        </div>
-      `;
-
-    }).join("");
+    render();
 
   }catch(error){
 
-    box.className="error";
-    box.innerHTML="Error cargando los datos de API-Football.";
+    box.innerHTML=
+      '<div class="error">Error cargando API-Football.</div>';
 
     console.error(error);
   }
@@ -277,6 +345,7 @@ async function loadMatches(){
 
 loadMatches();
 
+/* Actualización automática cada 60 segundos */
 setInterval(loadMatches,60000);
 </script>
 

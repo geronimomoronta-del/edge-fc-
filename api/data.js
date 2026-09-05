@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       live: Boolean(key),
-      version: "0.6.0"
+      version: "0.6.1"
     });
   }
 
@@ -23,12 +23,10 @@ export default async function handler(req, res) {
 
   let url = "";
 
-  // PARTIDOS EN VIVO
   if (action === "live") {
     url = "https://v3.football.api-sports.io/fixtures?live=all";
   }
 
-  // CUOTAS
   else if (action === "odds") {
     if (!fixture) {
       return res.status(400).json({
@@ -42,7 +40,6 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
-  // ESTADÍSTICAS DE UN PARTIDO
   else if (action === "stats") {
     if (!fixture) {
       return res.status(400).json({
@@ -56,7 +53,6 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
-  // DATOS COMPLETOS DEL FIXTURE
   else if (action === "fixture") {
     if (!fixture) {
       return res.status(400).json({
@@ -70,7 +66,6 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
-  // ÚLTIMOS PARTIDOS DE UN EQUIPO
   else if (action === "teamform") {
     if (!team) {
       return res.status(400).json({
@@ -79,21 +74,24 @@ export default async function handler(req, res) {
       });
     }
 
-    let last = Number(req.query.last || 10);
+    const today = new Date();
+    const fromDate = new Date();
 
-    if (!Number.isFinite(last)) last = 10;
+    fromDate.setDate(today.getDate() - 120);
 
-    last = Math.max(1, Math.min(last, 20));
+    const to = today.toISOString().slice(0, 10);
+    const from = fromDate.toISOString().slice(0, 10);
 
     url =
       "https://v3.football.api-sports.io/fixtures?team=" +
       encodeURIComponent(team) +
-      "&last=" +
-      last +
+      "&from=" +
+      from +
+      "&to=" +
+      to +
       "&status=FT";
   }
 
-  // PARTIDOS DEL DÍA
   else {
     const date = new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/Argentina/Buenos_Aires",
@@ -117,13 +115,23 @@ export default async function handler(req, res) {
 
     const json = await response.json();
 
+    let data = json.response || [];
+
+    if (action === "teamform") {
+      data = data
+        .sort((a, b) => {
+          return new Date(b.fixture.date) - new Date(a.fixture.date);
+        })
+        .slice(0, 10);
+    }
+
     return res.status(200).json({
       ok: true,
       source: "api-football",
       action,
       fixture: fixture || null,
       team: team || null,
-      data: json.response || [],
+      data,
       errors: json.errors || []
     });
 

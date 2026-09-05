@@ -1,36 +1,34 @@
 export default async function handler(req, res) {
   const key = process.env.FOOTBALL_API_KEY || "";
 
-  // Comprobación rápida
   if (req.query.action === "health") {
     return res.status(200).json({
       ok: true,
       live: Boolean(key),
-      version: "0.4.0"
+      version: "0.5.0"
     });
   }
 
   if (!key) {
     return res.status(200).json({
-      source: "demo",
+      ok: false,
       data: [],
       message: "Falta FOOTBALL_API_KEY"
     });
   }
 
   const action = req.query.action || "today";
+  const fixture = req.query.fixture;
 
-  let url = "https://v3.football.api-sports.io/fixtures";
+  let url = "";
 
   // PARTIDOS EN VIVO
   if (action === "live") {
-    url += "?live=all";
+    url = "https://v3.football.api-sports.io/fixtures?live=all";
   }
 
-  // CUOTAS DE UN PARTIDO
+  // CUOTAS
   else if (action === "odds") {
-    const fixture = req.query.fixture;
-
     if (!fixture) {
       return res.status(400).json({
         ok: false,
@@ -43,6 +41,34 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
+  // ESTADÍSTICAS DEL PARTIDO
+  else if (action === "stats") {
+    if (!fixture) {
+      return res.status(400).json({
+        ok: false,
+        error: "Falta fixture ID"
+      });
+    }
+
+    url =
+      "https://v3.football.api-sports.io/fixtures/statistics?fixture=" +
+      encodeURIComponent(fixture);
+  }
+
+  // DATOS COMPLETOS DEL FIXTURE
+  else if (action === "fixture") {
+    if (!fixture) {
+      return res.status(400).json({
+        ok: false,
+        error: "Falta fixture ID"
+      });
+    }
+
+    url =
+      "https://v3.football.api-sports.io/fixtures?id=" +
+      encodeURIComponent(fixture);
+  }
+
   // PARTIDOS DEL DÍA
   else {
     const date = new Intl.DateTimeFormat("en-CA", {
@@ -52,8 +78,8 @@ export default async function handler(req, res) {
       day: "2-digit"
     }).format(new Date());
 
-    url +=
-      "?date=" +
+    url =
+      "https://v3.football.api-sports.io/fixtures?date=" +
       date +
       "&timezone=America/Argentina/Buenos_Aires";
   }
@@ -71,6 +97,7 @@ export default async function handler(req, res) {
       ok: true,
       source: "api-football",
       action,
+      fixture: fixture || null,
       data: json.response || [],
       errors: json.errors || []
     });

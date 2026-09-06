@@ -66,6 +66,18 @@ export default async function handler(req, res) {
       encodeURIComponent(fixture);
   }
 
+  else if (action === "prediction") {
+  if (!fixture) {
+    return res.status(400).json({
+      ok: false,
+      error: "Falta fixture ID"
+    });
+  }
+
+  url =
+    "https://v3.football.api-sports.io/predictions?fixture=" +
+    encodeURIComponent(fixture);
+}
   else if (action === "teamform") {
     if (!team) {
       return res.status(400).json({

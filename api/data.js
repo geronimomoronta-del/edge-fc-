@@ -85,6 +85,7 @@ export default async function handler(req, res) {
     url =
       "https://v3.football.api-sports.io/fixtures?team=" +
       encodeURIComponent(team) +
+      "&season=2026" +
       "&from=" +
       from +
       "&to=" +

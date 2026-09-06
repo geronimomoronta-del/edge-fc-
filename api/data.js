@@ -156,7 +156,14 @@ export default async function handler(req, res) {
           ev:
             +(ev * 100).toFixed(2),
           value:
-            ev > 0
+  ev >= 0.05 && edge >= 0.03,
+
+confidence:
+  ev >= 0.15 && edge >= 0.08
+    ? "HIGH"
+    : ev >= 0.05 && edge >= 0.03
+    ? "MEDIUM"
+    : "LOW"
         };
       };
 

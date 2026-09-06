@@ -6,259 +6,317 @@
 <title>EDGE FC</title>
 
 <style>
+:root{
+  --bg:#070b10;
+  --panel:#0c131a;
+  --panel2:#0d151d;
+  --line:#1b2833;
+  --text:#f4f7fa;
+  --muted:#82909e;
+  --green:#91ff32;
+  --red:#ff6b6b;
+}
+
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  background:#070b10;
-  color:#f4f7fa;
-  font-family:Arial,sans-serif
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
 }
 
 header{
-  height:64px;
+  height:66px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 18px;
   border-bottom:1px solid #1b2530;
-  background:#090e14
+  background:#090e14;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
 .logo{
-  font-weight:800;
-  font-size:20px
+  font-weight:900;
+  font-size:20px;
 }
 
 .real{
-  color:#91ff32;
+  color:var(--green);
   font-size:12px;
-  font-weight:800
+  font-weight:800;
 }
 
 main{
-  max-width:1000px;
+  max-width:1050px;
   margin:auto;
-  padding:22px 16px
+  padding:22px 16px 60px;
 }
 
 h1{
-  font-size:26px;
-  margin:4px 0 6px
+  font-size:28px;
+  margin:4px 0 6px;
 }
 
 .sub{
-  color:#8593a3;
-  margin-bottom:20px
+  color:var(--muted);
+  margin-bottom:20px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .stat{
-  background:#0d151d;
-  border:1px solid #1b2833;
-  border-radius:10px;
-  padding:15px
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:15px;
 }
 
 .stat small{
   color:#748392;
   display:block;
   font-size:10px;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 .stat b{
-  font-size:20px
+  font-size:21px;
 }
 
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
+.controls{
+  display:flex;
   gap:8px;
-  margin-bottom:14px
+  flex-wrap:wrap;
+  margin-bottom:14px;
 }
 
-.tab{
+.tab,.filter{
   border:1px solid #26333e;
-  background:#0d151d;
+  background:var(--panel2);
   color:#9aa7b4;
-  padding:12px 5px;
+  padding:11px 12px;
   border-radius:9px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
-.tab.active{
-  background:#91ff32;
+.tab.active,.filter.active{
+  background:var(--green);
   color:#071006;
-  border-color:#91ff32
+  border-color:var(--green);
 }
 
 .toolbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:15px 0;
-  gap:10px
+  margin:14px 0;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.priority{
-  font-size:12px;
-  color:#93a0ad
+.search{
+  flex:1;
+  min-width:220px;
+  background:#0a1118;
+  border:1px solid var(--line);
+  color:var(--text);
+  padding:11px 12px;
+  border-radius:9px;
 }
 
 .refresh{
   border:0;
-  background:#91ff32;
+  background:var(--green);
   color:#071006;
-  padding:10px 13px;
-  border-radius:8px;
-  font-weight:800;
-  cursor:pointer
+  padding:11px 14px;
+  border-radius:9px;
+  font-weight:900;
+  cursor:pointer;
 }
 
 .panel{
-  background:#0c131a;
-  border:1px solid #1b2833;
-  border-radius:12px;
-  overflow:hidden
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
 }
 
 .match{
-  padding:15px 16px;
-  border-bottom:1px solid #17212a
+  padding:16px;
+  border-bottom:1px solid #17212a;
 }
 
 .match:last-child{
-  border-bottom:0
+  border-bottom:0;
 }
 
 .match.latam{
-  border-left:3px solid #91ff32
+  border-left:3px solid var(--green);
 }
 
 .league{
   color:#718090;
   font-size:11px;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 .teams{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px
+  gap:12px;
 }
 
 .names{
-  font-weight:700;
-  line-height:1.55
+  font-weight:800;
+  line-height:1.55;
+  font-size:17px;
 }
 
 .score{
   font-size:20px;
-  font-weight:800;
-  white-space:nowrap
+  font-weight:900;
+  white-space:nowrap;
 }
 
 .status{
   margin-top:7px;
   font-size:11px;
-  color:#91ff32
+  color:var(--green);
 }
 
 .date{
-  margin-top:7px;
+  margin-top:6px;
   font-size:11px;
-  color:#8492a0
+  color:#8492a0;
 }
 
-.analyze{
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
   margin-top:12px;
-  border:1px solid #91ff32;
+}
+
+.analyze,.statsbtn{
+  border:1px solid var(--green);
   background:transparent;
-  color:#91ff32;
+  color:var(--green);
   border-radius:8px;
   padding:9px 12px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
-.value-box{
+.statsbtn{
+  border-color:#4ea1ff;
+  color:#8fc5ff;
+}
+
+.value-box,.stats-box{
   margin-top:12px;
   background:#071009;
   border:1px solid #25421e;
-  border-radius:9px;
-  padding:12px
+  border-radius:10px;
+  padding:12px;
+}
+
+.stats-box{
+  background:#08101a;
+  border-color:#1c3550;
 }
 
 .value-title{
   font-size:12px;
-  color:#91ff32;
-  font-weight:800;
-  margin-bottom:10px
+  color:var(--green);
+  font-weight:900;
+  margin-bottom:10px;
 }
 
 .value-row{
   display:grid;
-  grid-template-columns:1.1fr .8fr .8fr .8fr;
+  grid-template-columns:1fr .8fr .8fr .8fr;
   gap:6px;
   padding:8px 0;
   border-bottom:1px solid #17261a;
-  font-size:12px
+  font-size:12px;
 }
 
 .value-row:last-child{
-  border-bottom:0
+  border-bottom:0;
 }
 
 .value-good{
-  color:#91ff32;
-  font-weight:800
+  color:var(--green);
+  font-weight:900;
 }
 
 .value-bad{
-  color:#8d99a5
+  color:#8d99a5;
 }
 
 .value-details{
   margin-top:4px;
   color:#8593a3;
   font-size:10px;
-  line-height:1.5
+  line-height:1.5;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  font-size:12px;
+}
+
+.stat-chip{
+  padding:8px;
+  border:1px solid #1c3550;
+  border-radius:8px;
+  color:#9fb3c8;
 }
 
 .empty,.error{
   padding:35px;
   text-align:center;
-  color:#8492a0
+  color:#8492a0;
 }
 
 .error{
-  color:#ff7272
+  color:var(--red);
+}
+
+.note{
+  margin-top:16px;
+  color:#748392;
+  font-size:11px;
+  line-height:1.5;
 }
 
 @media(max-width:650px){
   .stats{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:repeat(2,1fr);
   }
 
   h1{
-    font-size:22px
-  }
-
-  .tab{
-    font-size:11px
+    font-size:22px;
   }
 
   .value-row{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:1fr 1fr;
+  }
+
+  .names{
+    font-size:16px;
   }
 }
 </style>
@@ -276,71 +334,86 @@ h1{
 <h1>Football Betting Terminal</h1>
 
 <div class="sub">
-  Datos reales · Odds · Predictions · EDGE · EV
+Fixtures · Odds · Predictions · Stats · EDGE · EV
 </div>
 
 <div class="stats">
 
-  <div class="stat">
-    <small>TOTAL</small>
-    <b id="total">—</b>
-  </div>
+<div class="stat">
+<small>TOTAL</small>
+<b id="total">—</b>
+</div>
 
-  <div class="stat">
-    <small>EN VIVO</small>
-    <b id="liveCount">—</b>
-  </div>
+<div class="stat">
+<small>EN VIVO</small>
+<b id="liveCount">—</b>
+</div>
 
-  <div class="stat">
-    <small>PRÓXIMOS</small>
-    <b id="nextCount">—</b>
-  </div>
+<div class="stat">
+<small>PRÓXIMOS</small>
+<b id="nextCount">—</b>
+</div>
 
-  <div class="stat">
-    <small>FINALIZADOS</small>
-    <b id="finishedCount">—</b>
-  </div>
+<div class="stat">
+<small>FINALIZADOS</small>
+<b id="finishedCount">—</b>
+</div>
 
 </div>
 
-<div class="tabs">
+<div class="controls">
 
-  <button class="tab active"
-    onclick="changeTab('live',this)">
-    🔴 EN VIVO
-  </button>
+<button
+class="tab active"
+onclick="changeTab('live',this)">
+🔴 EN VIVO
+</button>
 
-  <button class="tab"
-    onclick="changeTab('next',this)">
-    🕒 PRÓXIMOS
-  </button>
+<button
+class="tab"
+onclick="changeTab('next',this)">
+🕒 PRÓXIMOS
+</button>
 
-  <button class="tab"
-    onclick="changeTab('finished',this)">
-    ✅ FINALIZADOS
-  </button>
+<button
+class="tab"
+onclick="changeTab('finished',this)">
+✅ FINALIZADOS
+</button>
+
+<button
+class="filter active"
+onclick="toggleLatam(this)">
+🌎 LATAM PRIORIDAD
+</button>
 
 </div>
 
 <div class="toolbar">
 
-  <div class="priority">
-    🇦🇷 LATAM tiene prioridad
-  </div>
+<input
+id="search"
+class="search"
+placeholder="Buscar equipo o liga..."
+oninput="render()">
 
-  <button class="refresh"
-    onclick="loadMatches()">
-    Actualizar
-  </button>
+<button
+class="refresh"
+onclick="loadMatches()">
+Actualizar
+</button>
 
 </div>
 
 <div class="panel" id="matches">
+<div class="empty">
+Cargando partidos...
+</div>
+</div>
 
-  <div class="empty">
-    Cargando partidos...
-  </div>
-
+<div class="note">
+EDGE FC usa probabilidades de API-Football como señal inicial.
+Los resultados son experimentales y no garantizan rentabilidad.
 </div>
 
 </main>
@@ -349,413 +422,573 @@ h1{
 
 let allMatches=[];
 let currentTab="live";
+let latamPriority=true;
 
 const liveStatuses=[
-  "1H","HT","2H","ET","BT","P","INT","LIVE"
+"1H","HT","2H","ET","BT","P","INT","LIVE"
 ];
 
 const latamCountries=[
-  "Argentina",
-  "Brazil",
-  "Brasil",
-  "Uruguay",
-  "Chile",
-  "Paraguay",
-  "Bolivia",
-  "Peru",
-  "Ecuador",
-  "Colombia",
-  "Venezuela",
-  "Mexico",
-  "Costa Rica",
-  "Panama",
-  "Honduras",
-  "Guatemala",
-  "El Salvador",
-  "Nicaragua",
-  "Dominican Republic"
+"Argentina",
+"Brazil",
+"Brasil",
+"Uruguay",
+"Chile",
+"Paraguay",
+"Bolivia",
+"Peru",
+"Ecuador",
+"Colombia",
+"Venezuela",
+"Mexico",
+"Costa Rica",
+"Panama",
+"Honduras",
+"Guatemala",
+"El Salvador",
+"Nicaragua",
+"Dominican Republic"
 ];
 
 function isLive(m){
-  return liveStatuses.includes(
-    m.fixture?.status?.short
-  );
+return liveStatuses.includes(
+m.fixture?.status?.short
+);
 }
 
 function isFinished(m){
-  return ["FT","AET","PEN"].includes(
-    m.fixture?.status?.short
-  );
+return [
+"FT","AET","PEN"
+].includes(
+m.fixture?.status?.short
+);
 }
 
 function isNext(m){
-  return ["NS","TBD"].includes(
-    m.fixture?.status?.short
-  );
+return [
+"NS","TBD"
+].includes(
+m.fixture?.status?.short
+);
 }
 
 function isLatam(m){
-  return latamCountries.includes(
-    m.league?.country
-  );
-}
-
-function prioritySort(a,b){
-
-  const aLatam=isLatam(a)?1:0;
-  const bLatam=isLatam(b)?1:0;
-
-  if(aLatam!==bLatam){
-    return bLatam-aLatam;
-  }
-
-  return new Date(a.fixture?.date) -
-         new Date(b.fixture?.date);
+return latamCountries.includes(
+m.league?.country
+);
 }
 
 function formatDate(date){
 
-  if(!date)return "";
+try{
 
-  try{
+return new Intl.DateTimeFormat(
+"es-AR",
+{
+day:"2-digit",
+month:"2-digit",
+hour:"2-digit",
+minute:"2-digit"
+}
+).format(
+new Date(date)
+);
 
-    return new Intl.DateTimeFormat(
-      "es-AR",
-      {
-        day:"2-digit",
-        month:"2-digit",
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    ).format(new Date(date));
+}catch{
 
-  }catch{
-    return "";
-  }
+return "";
+
 }
 
-function render(){
-
-  let list=[];
-
-  if(currentTab==="live"){
-    list=allMatches.filter(isLive);
-  }
-
-  if(currentTab==="next"){
-    list=allMatches.filter(isNext);
-  }
-
-  if(currentTab==="finished"){
-    list=allMatches.filter(isFinished);
-  }
-
-  list.sort(prioritySort);
-
-  const box=
-    document.getElementById("matches");
-
-  if(!list.length){
-
-    box.innerHTML=
-      '<div class="empty">'+
-      'No hay partidos en esta categoría.'+
-      '</div>';
-
-    return;
-  }
-
-  box.innerHTML=
-    list.map(m=>{
-
-      const id=m.fixture?.id;
-
-      const home=
-        m.teams?.home?.name || "Local";
-
-      const away=
-        m.teams?.away?.name || "Visitante";
-
-      const hg=m.goals?.home;
-      const ag=m.goals?.away;
-
-      const score=
-        hg!==null &&
-        hg!==undefined &&
-        ag!==null &&
-        ag!==undefined
-        ? `${hg} - ${ag}`
-        : "vs";
-
-      const country=
-        m.league?.country || "";
-
-      const league=
-        m.league?.name || "Competición";
-
-      const status=
-        m.fixture?.status?.long ||
-        m.fixture?.status?.short ||
-        "";
-
-      const elapsed=
-        m.fixture?.status?.elapsed;
-
-      let statusText=status;
-
-      if(isLive(m) && elapsed){
-        statusText=
-          `🔴 ${elapsed}' · ${status}`;
-      }
-
-      const analyzeButton=
-        currentTab==="next"
-        ? `
-        <button
-          class="analyze"
-          onclick="analyzeValue(${id})">
-          📊 Analizar valor
-        </button>
-
-        <div id="value-${id}"></div>
-        `
-        : "";
-
-      return `
-        <div class="match ${isLatam(m)?"latam":""}">
-
-          <div class="league">
-            ${isLatam(m)?"★ ":""}
-            ${country} · ${league}
-          </div>
-
-          <div class="teams">
-
-            <div class="names">
-              ${home}<br>
-              ${away}
-            </div>
-
-            <div class="score">
-              ${score}
-            </div>
-
-          </div>
-
-          <div class="status">
-            ${statusText}
-          </div>
-
-          <div class="date">
-            ${formatDate(m.fixture?.date)}
-          </div>
-
-          ${analyzeButton}
-
-        </div>
-      `;
-
-    }).join("");
 }
 
 function changeTab(tab,button){
 
-  currentTab=tab;
+currentTab=tab;
 
-  document
-    .querySelectorAll(".tab")
-    .forEach(b=>{
-      b.classList.remove("active");
-    });
+document
+.querySelectorAll(".tab")
+.forEach(
+b=>b.classList.remove("active")
+);
 
-  button.classList.add("active");
+button.classList.add("active");
 
-  render();
+render();
+
+}
+
+function toggleLatam(button){
+
+latamPriority=!latamPriority;
+
+button.classList.toggle(
+"active",
+latamPriority
+);
+
+render();
+
+}
+
+function render(){
+
+let list=[];
+
+if(currentTab==="live"){
+list=allMatches.filter(isLive);
+}
+
+if(currentTab==="next"){
+list=allMatches.filter(isNext);
+}
+
+if(currentTab==="finished"){
+list=allMatches.filter(isFinished);
+}
+
+const q=
+(
+document
+.getElementById("search")
+.value || ""
+)
+.trim()
+.toLowerCase();
+
+if(q){
+
+list=list.filter(m=>{
+
+const text=[
+m.teams?.home?.name,
+m.teams?.away?.name,
+m.league?.name,
+m.league?.country
+]
+.filter(Boolean)
+.join(" ")
+.toLowerCase();
+
+return text.includes(q);
+
+});
+
+}
+
+list.sort((a,b)=>{
+
+if(latamPriority){
+
+const aa=isLatam(a)?1:0;
+const bb=isLatam(b)?1:0;
+
+if(aa!==bb){
+return bb-aa;
+}
+
+}
+
+return (
+new Date(a.fixture?.date) -
+new Date(b.fixture?.date)
+);
+
+});
+
+const box=
+document.getElementById("matches");
+
+if(!list.length){
+
+box.innerHTML=
+'<div class="empty">No hay partidos en esta categoría.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+list.map(m=>{
+
+const id=
+m.fixture?.id;
+
+const home=
+m.teams?.home?.name || "Local";
+
+const away=
+m.teams?.away?.name || "Visitante";
+
+const hg=
+m.goals?.home;
+
+const ag=
+m.goals?.away;
+
+const score=
+(
+hg!==null &&
+hg!==undefined &&
+ag!==null &&
+ag!==undefined
+)
+?
+`${hg} - ${ag}`
+:
+"vs";
+
+const country=
+m.league?.country || "";
+
+const league=
+m.league?.name || "Competición";
+
+const status=
+m.fixture?.status?.long || "";
+
+const elapsed=
+m.fixture?.status?.elapsed;
+
+return `
+
+<div class="match ${isLatam(m)?"latam":""}">
+
+<div class="league">
+${isLatam(m)?"★ ":""}
+${country} · ${league}
+</div>
+
+<div class="teams">
+
+<div class="names">
+${home}
+<br>
+${away}
+</div>
+
+<div class="score">
+${score}
+</div>
+
+</div>
+
+<div class="status">
+
+${
+isLive(m) && elapsed
+?
+`🔴 ${elapsed}' · ${status}`
+:
+status
+}
+
+</div>
+
+<div class="date">
+${formatDate(m.fixture?.date)}
+</div>
+
+<div class="actions">
+
+${
+currentTab==="next"
+?
+`
+<button
+class="analyze"
+onclick="analyzeValue(${id})">
+📊 Analizar valor
+</button>
+`
+:
+""
+}
+
+<button
+class="statsbtn"
+onclick="loadStats(${id})">
+📈 Estadísticas
+</button>
+
+</div>
+
+<div id="value-${id}"></div>
+<div id="stats-${id}"></div>
+
+</div>
+
+`;
+
+}).join("");
+
 }
 
 async function analyzeValue(fixture){
 
-  const box=
-    document.getElementById(
-      "value-"+fixture
-    );
+const box=
+document.getElementById(
+"value-"+fixture
+);
 
-  box.innerHTML=
-    '<div class="value-box">'+
-    'Calculando EDGE...'+
-    '</div>';
+box.innerHTML=
+'<div class="value-box">Calculando EDGE...</div>';
 
-  try{
+try{
 
-    const response=
-      await fetch(
-        "/api/data?action=value&fixture="+
-        fixture
-      );
+const response=
+await fetch(
+"/api/data?action=value&fixture="+fixture
+);
 
-    const json=
-      await response.json();
+const json=
+await response.json();
 
-    if(!json.ok){
+if(!json.ok){
 
-      box.innerHTML=
-        '<div class="value-box error">'+
-        (json.error ||
-        "No se pudo analizar este partido.")+
-        '</div>';
+box.innerHTML=
+'<div class="value-box error">' +
+(
+json.error ||
+"No se pudo analizar este partido."
+) +
+'</div>';
 
-      return;
-    }
+return;
 
-    const opportunities=
-      json.opportunities || [];
+}
 
-    const rows=
-      opportunities.map(o=>{
+const rows=
+(json.opportunities || [])
+.map(o=>{
 
-        const good=
-          o.value
-          ? "value-good"
-          : "value-bad";
+return `
 
-        const symbol=
-          o.value ? "🟢" : "⚪";
+<div class="value-row ${o.value?"value-good":"value-bad"}">
 
-        return `
-          <div class="value-row ${good}">
+<div>
+${o.value?"🟢":"⚪"}
+${o.selection}
+</div>
 
-            <div>
-              ${symbol} ${o.selection}
-            </div>
+<div>
+Cuota ${o.odd}
+</div>
 
-            <div>
-              Cuota ${o.odd}
-            </div>
+<div>
+EDGE ${o.edge}%
+</div>
 
-            <div>
-              EDGE ${o.edge}%
-            </div>
+<div>
+EV ${o.ev}%
+</div>
 
-            <div>
-              EV ${o.ev}%
-            </div>
+<div class="value-details">
+Mercado: ${o.market_probability}%
+</div>
 
-            <div class="value-details">
-              Mercado:
-              ${o.market_probability}%
-            </div>
+<div class="value-details">
+Modelo: ${o.model_probability}%
+</div>
 
-            <div class="value-details">
-              Modelo:
-              ${o.model_probability}%
-            </div>
+<div class="value-details">
+Justa: ${o.fair_odd}
+</div>
 
-            <div class="value-details">
-              Cuota justa:
-              ${o.fair_odd}
-            </div>
+</div>
 
-          </div>
-        `;
+`;
 
-      }).join("");
+})
+.join("");
 
-    box.innerHTML=`
-      <div class="value-box">
+box.innerHTML=`
 
-        <div class="value-title">
-          VALUE FINDER · ${json.bookmaker}
-        </div>
+<div class="value-box">
 
-        ${rows}
+<div class="value-title">
+VALUE FINDER · ${json.bookmaker}
+</div>
 
-        <div class="value-details">
-          ${json.prediction_advice || ""}
-        </div>
+${rows}
 
-      </div>
-    `;
+<div class="value-details">
+${json.prediction_advice || ""}
+</div>
 
-  }catch(error){
+</div>
 
-    box.innerHTML=
-      '<div class="value-box error">'+
-      'Error calculando el Value Finder.'+
-      '</div>';
-  }
+`;
+
+}catch{
+
+box.innerHTML=
+'<div class="value-box error">Error calculando el Value Finder.</div>';
+
+}
+
+}
+
+async function loadStats(fixture){
+
+const box=
+document.getElementById(
+"stats-"+fixture
+);
+
+box.innerHTML=
+'<div class="stats-box">Cargando estadísticas...</div>';
+
+try{
+
+const response=
+await fetch(
+"/api/data?action=stats&fixture="+fixture
+);
+
+const json=
+await response.json();
+
+const teams=
+json.data || [];
+
+if(!teams.length){
+
+box.innerHTML=
+'<div class="stats-box error">No hay estadísticas disponibles.</div>';
+
+return;
+
+}
+
+const wanted=[
+"Total Shots",
+"Shots on Goal",
+"Corner Kicks",
+"Ball Possession",
+"Yellow Cards",
+"Offsides",
+"Goalkeeper Saves"
+];
+
+box.innerHTML=
+teams.map(t=>{
+
+const stats=
+Object.fromEntries(
+(t.statistics || [])
+.map(
+s=>[s.type,s.value]
+)
+);
+
+return `
+
+<div class="stats-box">
+
+<div class="value-title">
+${t.team?.name || "Equipo"}
+</div>
+
+<div class="stat-grid">
+
+${
+wanted.map(k=>`
+
+<div class="stat-chip">
+${k}:
+<b>${stats[k] ?? "—"}</b>
+</div>
+
+`).join("")
+}
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}catch{
+
+box.innerHTML=
+'<div class="stats-box error">Error cargando estadísticas.</div>';
+
+}
+
 }
 
 async function loadMatches(){
 
-  const box=
-    document.getElementById("matches");
+const box=
+document.getElementById("matches");
 
-  box.innerHTML=
-    '<div class="empty">'+
-    'Actualizando datos reales...'+
-    '</div>';
+box.innerHTML=
+'<div class="empty">Actualizando datos reales...</div>';
 
-  try{
+try{
 
-    const response=
-      await fetch(
-        "/api/data?ts="+Date.now()
-      );
+const response=
+await fetch(
+"/api/data?ts="+Date.now()
+);
 
-    const json=
-      await response.json();
+const json=
+await response.json();
 
-    allMatches=
-      json.matches ||
-      json.data ||
-      json.response ||
-      [];
+allMatches=
+json.matches ||
+json.data ||
+json.response ||
+[];
 
-    const live=
-      allMatches.filter(isLive);
+const live=
+allMatches.filter(isLive);
 
-    const next=
-      allMatches.filter(isNext);
+const next=
+allMatches.filter(isNext);
 
-    const finished=
-      allMatches.filter(isFinished);
+const finished=
+allMatches.filter(isFinished);
 
-    document
-      .getElementById("total")
-      .textContent=
-      allMatches.length;
+document
+.getElementById("total")
+.textContent=
+allMatches.length;
 
-    document
-      .getElementById("liveCount")
-      .textContent=
-      live.length;
+document
+.getElementById("liveCount")
+.textContent=
+live.length;
 
-    document
-      .getElementById("nextCount")
-      .textContent=
-      next.length;
+document
+.getElementById("nextCount")
+.textContent=
+next.length;
 
-    document
-      .getElementById("finishedCount")
-      .textContent=
-      finished.length;
+document
+.getElementById("finishedCount")
+.textContent=
+finished.length;
 
-    render();
+render();
 
-  }catch(error){
+}catch{
 
-    box.innerHTML=
-      '<div class="error">'+
-      'Error cargando API-Football.'+
-      '</div>';
-  }
+box.innerHTML=
+'<div class="error">Error cargando API-Football.</div>';
+
+}
+
 }
 
 loadMatches();
 
 setInterval(
-  loadMatches,
-  60000
+loadMatches,
+60000
 );
 
 </script>

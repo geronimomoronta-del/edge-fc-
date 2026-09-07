@@ -163,8 +163,15 @@ confidence:
     ? "HIGH"
     : ev >= 0.05 && edge >= 0.03
     ? "MEDIUM"
-    : "LOW"
-        };
+    : "LOW",
+
+recommendation:
+  ev >= 0.15 && edge >= 0.08
+    ? "SEÑAL FUERTE"
+    : ev >= 0.05 && edge >= 0.03
+    ? "SEÑAL MODERADA"
+    : "SIN APUESTA"
+};
       };
 
       const opportunities = [

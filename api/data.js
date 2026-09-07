@@ -116,7 +116,7 @@ export default async function handler(req, res) {
       const percent =
         prediction.predictions?.percent || {};
 
-      const modelProb = {
+      const baselineProb = {
         home:
           parseFloat(percent.home || "0") / 100,
         draw:
@@ -124,7 +124,11 @@ export default async function handler(req, res) {
         away:
           parseFloat(percent.away || "0") / 100
       };
-
+const edgeProb = {
+  home: baselineProb.home,
+  draw: baselineProb.draw,
+  away: baselineProb.away
+};
       const calculate = (
         selection,
         odd,
@@ -178,19 +182,19 @@ recommendation:
         calculate(
           "HOME",
           homeOdd,
-          modelProb.home,
+          edgeProb.home,
           marketProb.home
         ),
         calculate(
           "DRAW",
           drawOdd,
-          modelProb.draw,
+          edgeProb.draw,
           marketProb.draw
         ),
         calculate(
           "AWAY",
           awayOdd,
-          modelProb.away,
+          edgeProb.away,
           marketProb.away
         )
       ].sort((a, b) => {

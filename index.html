@@ -608,7 +608,12 @@ return text.includes(q);
 }
 
 list.sort((a,b)=>{
+const priorityA = isPriorityLeague(a) ? 1 : 0;
+const priorityB = isPriorityLeague(b) ? 1 : 0;
 
+if(priorityA !== priorityB){
+  return priorityB - priorityA;
+}
 if(latamPriority){
 
 const aa=isLatam(a)?1:0;

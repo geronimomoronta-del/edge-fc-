@@ -186,7 +186,29 @@ confidence:
           modelProb.away,
           marketProb.away
         )
-      ].sort((a, b) => b.ev - a.ev);
+      ].sort((a, b) => {
+  if (a.value !== b.value) {
+    return Number(b.value) - Number(a.value);
+  }
+
+  const confidenceRank = {
+    HIGH: 3,
+    MEDIUM: 2,
+    LOW: 1
+  };
+
+  if (
+    confidenceRank[a.confidence] !==
+    confidenceRank[b.confidence]
+  ) {
+    return (
+      confidenceRank[b.confidence] -
+      confidenceRank[a.confidence]
+    );
+  }
+
+  return b.ev - a.ev;
+});
 
       return res.status(200).json({
         ok: true,

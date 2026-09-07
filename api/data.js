@@ -133,7 +133,8 @@ const edgeProb = {
         selection,
         odd,
         model,
-        market
+        market,
+        baseline
       ) => {
         const fairOdd =
           model > 0 ? 1 / model : null;
@@ -151,6 +152,8 @@ const edgeProb = {
             +(market * 100).toFixed(2),
           model_probability:
             +(model * 100).toFixed(2),
+          baseline_probability:
+  +(baseline * 100).toFixed(2),
           fair_odd:
             fairOdd
             ? +fairOdd.toFixed(2)
@@ -183,19 +186,22 @@ recommendation:
           "HOME",
           homeOdd,
           edgeProb.home,
-          marketProb.home
+          marketProb.home,
+          baselineProb.home
         ),
         calculate(
           "DRAW",
           drawOdd,
           edgeProb.draw,
-          marketProb.draw
+          marketProb.draw,
+          baselineProb.draw
         ),
         calculate(
           "AWAY",
           awayOdd,
           edgeProb.away,
-          marketProb.away
+          marketProb.away,
+          baselineProb.away
         )
       ].sort((a, b) => {
   if (a.value !== b.value) {

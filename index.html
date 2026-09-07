@@ -449,7 +449,38 @@ const latamCountries=[
 "Nicaragua",
 "Dominican Republic"
 ];
+const priorityLeagues = [
+  // LATAM
+  "Primera División",
+  "Liga Profesional Argentina",
+  "Copa de la Liga Profesional",
+  "Serie A",
+  "Serie B",
+  "Primera A",
+  "Primera Division",
+  "Liga MX",
+  "Copa Libertadores",
+  "CONMEBOL Libertadores",
+  "Copa Sudamericana",
+  "CONMEBOL Sudamericana",
 
+  // Europa principales
+  "Premier League",
+  "La Liga",
+  "Bundesliga",
+  "Serie A",
+  "Ligue 1",
+  "UEFA Champions League",
+  "UEFA Europa League"
+];
+
+function isPriorityLeague(m){
+  const league = (m.league?.name || "").toLowerCase();
+
+  return priorityLeagues.some(name =>
+    league.includes(name.toLowerCase())
+  );
+}
 function isLive(m){
 return liveStatuses.includes(
 m.fixture?.status?.short

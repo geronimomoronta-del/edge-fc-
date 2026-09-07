@@ -794,6 +794,10 @@ Baseline API: ${o.model_probability}%
 Confianza: ${o.confidence}
 </div>
 <div class="value-details">
+${o.recommendation === "SEÑAL FUERTE" ? "🟢" : o.recommendation === "SEÑAL MODERADA" ? "🟡" : "⚪"}
+Recomendación: <b>${o.recommendation}</b>
+</div>
+<div class="value-details">
 Justa: ${o.fair_odd}
 </div>
 
